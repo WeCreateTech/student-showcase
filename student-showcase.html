@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Built at WCT | Student Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wct-blue: #13aba6;
+    --wct-pink: #f11684;
+    --wct-brown: #6e4e42;
+    --wct-gold: #fab40b;
+    --wct-orange: #f1421b;
+    --wct-black: #0d0d0d;
+    --wct-cream: #faf6f1;
+    --wct-white: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--wct-black);
+    color: var(--wct-white);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(19, 171, 166, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(241, 22, 132, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(250, 180, 11, 0.08) 0%, transparent 50%);
+    z-index: 0;
+    animation: heroPulse 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroPulse {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wct-blue);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--wct-blue);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--wct-blue), var(--wct-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  .stripe-divider {
+    width: 100%;
+    height: 4px;
+    display: flex;
+  }
+
+  .stripe-divider span {
+    flex: 1;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    overflow: hidden;
+    width: 100%;
+    background: var(--wct-black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 0;
+  }
+
+  .ticker {
+    display: flex;
+    animation: ticker 25s linear infinite;
+    width: max-content;
+  }
+
+  .ticker-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 32px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .ticker-item .dot {
+    color: var(--wct-pink);
+    margin-right: 32px;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* PROJECTS SECTION */
+  .projects-section {
+    background: var(--wct-cream);
+    padding: 80px 24px;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+
+  .section-header .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--wct-blue);
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--wct-black);
+    margin-bottom: 16px;
+  }
+
+  .section-header p {
+    color: var(--wct-brown);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* PROJECT CARD */
+  .project-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
+  }
+
+  .project-card {
+    background: var(--wct-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .card-preview {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--wct-black);
+  }
+
+  .card-preview iframe {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: top left;
+    border: none;
+    pointer-events: none;
+  }
+
+  .card-preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--wct-blue);
+    color: var(--wct-white);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  .card-body {
+    padding: 28px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--wct-black);
+    margin-bottom: 8px;
+  }
+
+  .card-meta {
+    font-size: 0.85rem;
+    color: var(--wct-brown);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--wct-pink);
+    display: inline-block;
+  }
+
+  .card-body p {
+    font-size: 0.95rem;
+    color: #5a4a44;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .tech-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--wct-cream);
+    color: var(--wct-brown);
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-live {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--wct-blue);
+    color: var(--wct-white);
+  }
+
+  .btn-primary:hover {
+    background: #0f928e;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--wct-black);
+    border: 1.5px solid rgba(0,0,0,0.15);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--wct-black);
+  }
+
+  .btn-icon {
+    font-size: 1rem;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--wct-black);
+    padding: 60px 24px;
+  }
+
+  .stats-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+
+  .stat-item .stat-number {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--wct-blue), var(--wct-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--wct-blue);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: var(--wct-black);
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    font-size: 1.05rem;
+    color: rgba(0,0,0,0.65);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cta-btn-dark {
+    background: var(--wct-black);
+    color: var(--wct-white);
+  }
+
+  .cta-btn-dark:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+  }
+
+  .cta-btn-outline {
+    background: transparent;
+    color: var(--wct-black);
+    border: 2px solid rgba(0,0,0,0.3);
+  }
+
+  .cta-btn-outline:hover {
+    border-color: var(--wct-black);
+  }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    background: var(--wct-black);
+    padding: 40px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-note p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-note a {
+    color: var(--wct-blue);
+    text-decoration: none;
+  }
+
+  /* EMPTY STATE (for cards coming soon) */
+  .coming-soon-card {
+    background: var(--wct-white);
+    border-radius: 16px;
+    border: 2px dashed rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .coming-soon-card .cs-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .coming-soon-card h3 {
+    font-size: 1.1rem;
+    color: var(--wct-brown);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .coming-soon-card p {
+    font-size: 0.9rem;
+    color: rgba(110, 78, 66, 0.6);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { min-height: 55vh; padding: 60px 20px 40px; }
+    .project-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; gap: 28px; }
+    .card-actions { flex-direction: column; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Built at WCT</div>
+    <h1>Students don't just learn tech.<br>They <span class="highlight">build it.</span></h1>
+    <p class="hero-sub">Real projects. Real code. Built by future technologists in We Create Tech programs. Every project here was designed, coded, and shipped by a student.</p>
+  </div>
+</section>
+
+<!-- STRIPE DIVIDER -->
+<div class="stripe-divider">
+  <span style="background: var(--wct-pink)"></span>
+  <span style="background: var(--wct-blue)"></span>
+  <span style="background: var(--wct-gold)"></span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><span class="dot">&#9679;</span> HTML</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> CSS</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> JavaScript</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> React</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Capacitor</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Figma</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> App Development</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> UI/UX Design</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Game Design</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> AI</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> HTML</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> CSS</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> JavaScript</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> React</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Capacitor</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Figma</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> App Development</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> UI/UX Design</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> Game Design</span>
+    <span class="ticker-item"><span class="dot">&#9679;</span> AI</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-section">
+  <div class="section-header">
+    <div class="label">Student Projects</div>
+    <h2>What They're Building</h2>
+    <p>These aren't classroom exercises. These are real applications built by students in our Best Buy Teen Tech Center After School Program.</p>
+  </div>
+
+  <div class="project-grid">
+
+    <!-- FOCUSGUARD CARD -->
+    <div class="project-card">
+      <div class="card-preview">
+        <iframe src="https://wecreatetech.github.io/FocusGuard/" loading="lazy" sandbox="allow-scripts allow-same-origin" title="FocusGuard Preview"></iframe>
+        <div class="card-preview-overlay"></div>
+        <div class="card-badge">Live Project</div>
+      </div>
+      <div class="card-body">
+        <h3>FocusGuard</h3>
+        <div class="card-meta">
+          Best Buy After School Program <span class="sep"></span> Spring 2026
+        </div>
+        <p>A screen time monitoring dashboard with a parent portal, live activity feeds, focus alerts, device profiles, and customizable usage limits. Built from scratch by a student who identified a real problem and coded the solution.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Capacitor</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://wecreatetech.github.io/FocusGuard/" target="_blank" class="btn-live btn-primary">
+            <span class="btn-icon">&#9654;</span> View Live App
+          </a>
+          <a href="https://github.com/wecreatetech/FocusGuard" target="_blank" class="btn-live btn-secondary">
+            <span class="btn-icon">&lt;/&gt;</span> Source Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMING SOON CARDS -->
+    <div class="coming-soon-card">
+      <div class="cs-icon">&#128187;</div>
+      <h3>More projects dropping soon</h3>
+      <p>Students are building right now. Check back.</p>
+    </div>
+
+    <div class="coming-soon-card">
+      <div class="cs-icon">&#128640;</div>
+      <h3>Your project could be here</h3>
+      <p>Join a WCT program and ship something real.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stripe-divider">
+  <span style="background: var(--wct-gold)"></span>
+  <span style="background: var(--wct-pink)"></span>
+  <span style="background: var(--wct-blue)"></span>
+</div>
+
+<section class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">1,100+</div>
+      <div class="stat-label">Students Served</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">20</div>
+      <div class="stat-label">U.S. States</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Countries</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>This is what happens when you invest in students. 🤎</h2>
+  <p>Every dollar, every volunteer hour, every partnership builds the conditions for students to create technology, not just consume it.</p>
+  <div class="cta-buttons">
+    <a href="https://donate.wecreatetech.org/" target="_blank" class="cta-btn cta-btn-dark">Support This Work</a>
+    <a href="https://volunteer.wecreatetech.org/" target="_blank" class="cta-btn cta-btn-outline">Become an Advisor</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-note">
+  <p>We Create Tech &middot; 501(c)(3) &middot; EIN 87-4506890 &middot; <a href="https://wecreatetech.org">wecreatetech.org</a></p>
+</div>
+
+</body>
+</html>
